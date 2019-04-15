@@ -8,8 +8,8 @@
 依赖
 ---
 
-- JQuery v3.4.0：[Jquery](https://jquery.com/)
-- Font Awesome v5.8.1：[Font Awesome](https://fontawesome.com/)
+- JQuery v3.4.0 +：[Jquery](https://jquery.com/)
+- Font Awesome v5.8.1 +：[Font Awesome](https://fontawesome.com/)
 
 使用
 ---
@@ -104,3 +104,7 @@ __ALERT__.notice({
     negativeoption:()=>{$("#ALERTJS_alertNoticeBox").hide();$("#ALERTJS_alertNoticeBox").remove();}
 })
 ```
+---
+- 隐藏弹窗
+`__ALERT__.hideNotice()`
+参数：该方法无任何参数
