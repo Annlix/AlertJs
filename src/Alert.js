@@ -16,6 +16,7 @@ var Alert = class {
         }
     }
     load(params={cover:{background:"#ffffff"},box:{background:"rgba(16,16,16,.5)",size:"100px"},img:{size:"100px"},timeout:0}){
+        window.clearTimeout(__ALERT__.TIMER);
         this.data.load.cover = params.cover?params.cover:{background:"#ffffff"};
         this.data.load.box = params.box?params.box:{background:"rgba(16,16,16,.5)",size: "100px"};
         this.data.load.img = params.img?params.img:{size:"100px"};
@@ -53,6 +54,7 @@ var Alert = class {
         ;
     };
     toast(data={content:"操作成功！",fn:()=>{},timeout:0}){
+        window.clearTimeout(__ALERT__.TIMER);
         data.content = data.content?data.content:"操作成功！";
         data.timeout = data.timeout?data.timeout:3;
         this.fn1=()=>{
@@ -82,6 +84,7 @@ var Alert = class {
         $("#ALERTJS_alertBox").remove();
     }
     notice(data={title:"警告",maintip:"发生错误了！",secondarytip:"我们遇到了一个未知的错误！",positivetext:"好的，我明白了！",positiveoption:()=>{$("#ALERTJS_alertNoticeBox").hide();$("#ALERTJS_alertNoticeBox").remove();},negativetext:"关闭",negativeoption:()=>{$("#ALERTJS_alertNoticeBox").hide();$("#ALERTJS_alertNoticeBox").remove();}}){
+        window.clearTimeout(__ALERT__.TIMER);
         data.title = data.title ? data.title : "警告";
         data.maintip = data.maintip ? data.maintip : "发生错误了！";
         data.secondarytip = data.secondarytip ? data.secondarytip : "我们遇到了一个未知的错误！";
@@ -127,8 +130,39 @@ var Alert = class {
         $("#ALERTJS_alertNoticeBox").show();
     }
     hideNotice(){
+        window.clearTimeout(__ALERT__.TIMER);
         $("#ALERTJS_alertNoticeBox").hide();
         $("#ALERTJS_alertNoticeBox").remove();
+    }
+    tip(data={content:"输入不可为空！",fn:()=>{__ALERT__.hideTip()},timeout:3}){
+        window.clearTimeout(__ALERT__.TIMER);
+        data.content = data.content?data.content:"信息提示！";
+        this.fn1=()=>{
+            data.fn();
+        };
+        data.timeout = data.timeout?data.timeout:3;
+        $("#ALERTJS_alertTipBox").remove();
+        let boxWidth = data.content.length+2+"em";
+        let midW = Math.floor((data.content.length+2)/2)+"em";
+        let html = `
+            <div id="ALERTJS_alertTipBox" style="min-height:50px;max-height:50px;height:50px;line-height:50px;padding:0 2em;background:rgba(16,16,16,.5);position:fixed;top:calc(50vh - 25px);left:calc(50% - ${midW});display:block;color:#fff;border-radius:4px;box-shadow:1px 1px 5px #1f1f1f">
+                ${data.content}
+            </div>
+        `;
+        $("body").append(html);
+        $("#ALERTJS_alertTipBox").show();
+        if(data.timeout>0){
+            this.TIMER = window.setTimeout(()=>{
+                $("#ALERTJS_alertTipBox").hide();
+                $("#ALERTJS_alertTipBox").remove();
+                __ALERT__.fn1();
+            },data.timeout*1000)
+        }
+    }
+    hideTip(){
+        window.clearTimeout(__ALERT__.TIMER);
+        $("#ALERTJS_alertTipBox").hide();
+        $("#ALERTJS_alertTipBox").remove();
     }
 };
 var __ALERT__ = new Alert();
