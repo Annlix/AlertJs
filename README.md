@@ -89,9 +89,9 @@ __ALERT__.toast({
 | maintip | 主要提示 | 发生错误了！ |
 | secondarytip | 次要提示 | 我们遇到了一个未知的错误！ |
 | positivetext | 积极按钮文字 | 好的，我明白了！ |
-| positiveoption | 积极回调 | `()=>{$("#ALERTJS_alertNoticeBox").hide();$("#ALERTJS_alertNoticeBox").remove();}` |
+| positiveoption | 积极回调 | `()=>{__ALERT__.hideNotice();}` |
 | negativetext | 消极按钮文字 | 关闭 |
-| negativeoption | 消极回调 | `()=>{$("#ALERTJS_alertNoticeBox").hide();$("#ALERTJS_alertNoticeBox").remove();}` |
+| negativeoption | 消极回调 | `()=>{__ALERT__.hideNotice();}` |
 
 ```
 __ALERT__.notice({
@@ -99,9 +99,9 @@ __ALERT__.notice({
     maintip:"操作失败！",
     secondarytip:"服务器发生了一个错误！",
     positivetext:"确定",
-    positiveoption:()=>{$("#ALERTJS_alertNoticeBox").hide();$("#ALERTJS_alertNoticeBox").remove();},
+    positiveoption:()=>{__ALERT__.hideNotice();},
     negativetext:"取消",
-    negativeoption:()=>{$("#ALERTJS_alertNoticeBox").hide();$("#ALERTJS_alertNoticeBox").remove();}
+    negativeoption:()=>{__ALERT__.hideNotice();}
 })
 ```
 ---
